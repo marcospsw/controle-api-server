@@ -1,6 +1,6 @@
 package com.wergles.controleapiserver.infra.gateway.model
 
-import com.wergles.controleapiserver.domain.entity.FixedExpenses
+import com.wergles.controleapiserver.domain.entity.FixedExpense
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
@@ -8,7 +8,7 @@ import java.math.BigDecimal
 import java.time.LocalDateTime
 
 @Document(collection = "fixed_expenses")
-data class FixedExpensesDocument(
+data class FixedExpenseDocument(
     @Id
     val id: String? = null,
     val title: String,
@@ -19,7 +19,7 @@ data class FixedExpensesDocument(
     val created_at: LocalDateTime? = null,
     val updated_at: LocalDateTime? = null,
 ) {
-    fun toDomain() = FixedExpenses(
+    fun toDomain() = FixedExpense(
         id = id,
         title = title,
         description = description,

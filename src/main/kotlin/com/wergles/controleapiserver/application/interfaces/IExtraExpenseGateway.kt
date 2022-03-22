@@ -1,0 +1,3 @@
+package com.wergles.controleapiserver.application.interfaces
+
+interface IExtraExpenseGateway

@@ -1,6 +1,6 @@
 package com.wergles.controleapiserver.infra.gateway.model
 
-import com.wergles.controleapiserver.domain.entity.ExtraExpenses
+import com.wergles.controleapiserver.domain.entity.ExtraExpense
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
@@ -8,7 +8,7 @@ import java.math.BigDecimal
 import java.time.LocalDateTime
 
 @Document(collection = "extra_expenses")
-data class ExtraExpensesDocument(
+data class ExtraExpenseDocument(
     @Id
     val id: String? = null,
     val title: String,
@@ -21,7 +21,7 @@ data class ExtraExpensesDocument(
     val created_at: LocalDateTime? = null,
     val updated_at: LocalDateTime? = null,
 ) {
-    fun toDomain() = ExtraExpenses(
+    fun toDomain() = ExtraExpense(
         id = id,
         title = title,
         description = description,
