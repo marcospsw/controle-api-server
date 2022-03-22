@@ -4,5 +4,4 @@ import com.wergles.controleapiserver.infra.gateway.repository.ExtraEarningsRepos
 import org.springframework.stereotype.Service
 
 @Service
-class ExtraEarningsGateway(private val extraEarningsRepository: ExtraEarningsRepository) {
-}
+class ExtraEarningsGateway(private val extraEarningsRepository: ExtraEarningsRepository)

@@ -4,5 +4,4 @@ import com.wergles.controleapiserver.infra.gateway.repository.FixedExpensesRepos
 import org.springframework.stereotype.Service
 
 @Service
-class FixedExpensesGateway(private val fixedExpensesRepository: FixedExpensesRepository) {
-}
+class FixedExpensesGateway(private val fixedExpensesRepository: FixedExpensesRepository)

@@ -9,5 +9,4 @@ class ControleApiServerApplicationTests {
     @Test
     fun contextLoads() {
     }
-
 }

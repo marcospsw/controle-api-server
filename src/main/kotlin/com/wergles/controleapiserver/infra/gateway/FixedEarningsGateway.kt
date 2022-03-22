@@ -4,5 +4,4 @@ import com.wergles.controleapiserver.infra.gateway.repository.FixedEarningsRepos
 import org.springframework.stereotype.Service
 
 @Service
-class FixedEarningsGateway(private val fixedEarningsRepository: FixedEarningsRepository) {
-}
+class FixedEarningsGateway(private val fixedEarningsRepository: FixedEarningsRepository)

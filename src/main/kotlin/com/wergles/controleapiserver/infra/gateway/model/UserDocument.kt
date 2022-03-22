@@ -30,4 +30,3 @@ data class UserDocument(
         updated_at = updated_at
     )
 }
-
