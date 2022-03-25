@@ -7,7 +7,7 @@ data class ExtraExpense(
     val id: String? = null,
     val title: String,
     val description: String? = null,
-    val user_id: String,
+    val userId: String,
     val value: BigDecimal,
     val month: Int,
     val year: Int,

@@ -1,6 +1,8 @@
 package com.wergles.controleapiserver.infra.gateway.repository
 
 import com.wergles.controleapiserver.infra.gateway.model.FixedEarningDocument
-import org.springframework.data.mongodb.repository.ReactiveMongoRepository
+import org.springframework.data.mongodb.repository.MongoRepository
 
-interface FixedEarningRepository : ReactiveMongoRepository<FixedEarningDocument, String>
+interface FixedEarningRepository : MongoRepository<FixedEarningDocument, String> {
+    fun getAllByUserId(userId: String): List<FixedEarningDocument>?
+}

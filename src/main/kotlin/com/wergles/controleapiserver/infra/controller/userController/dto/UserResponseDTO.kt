@@ -1,9 +1,9 @@
-package com.wergles.controleapiserver.infra.controller.dto
+package com.wergles.controleapiserver.infra.controller.userController.dto
 
 import com.wergles.controleapiserver.domain.entity.User
 import java.time.LocalDateTime
 
-data class UserResponse(
+data class UserResponseDTO(
     val id: String? = null,
     val name: String,
     val email: String,
@@ -13,7 +13,7 @@ data class UserResponse(
     val updated_at: LocalDateTime? = null
 )
 
-fun User.toResponse() = UserResponse(
+fun User.toResponse() = UserResponseDTO(
     id = id,
     name = name,
     email = email,
@@ -22,4 +22,3 @@ fun User.toResponse() = UserResponse(
     created_at = created_at,
     updated_at = updated_at
 )
-

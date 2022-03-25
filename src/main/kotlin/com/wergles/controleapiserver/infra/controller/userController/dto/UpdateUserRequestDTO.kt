@@ -1,9 +1,9 @@
-package com.wergles.controleapiserver.infra.controller.dto
+package com.wergles.controleapiserver.infra.controller.userController.dto
 
 import com.wergles.controleapiserver.domain.entity.User
 import java.time.LocalDateTime
 
-data class CreateUserRequest(
+data class UpdateUserRequestDTO(
     val name: String,
     val email: String,
     val cpf: String,

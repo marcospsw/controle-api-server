@@ -1,6 +1,6 @@
 package com.wergles.controleapiserver.infra.gateway.repository
 
 import com.wergles.controleapiserver.infra.gateway.model.UserDocument
-import org.springframework.data.mongodb.repository.ReactiveMongoRepository
+import org.springframework.data.mongodb.repository.MongoRepository
 
-interface UserRepository : ReactiveMongoRepository<UserDocument, String>
+interface UserRepository : MongoRepository<UserDocument, String>

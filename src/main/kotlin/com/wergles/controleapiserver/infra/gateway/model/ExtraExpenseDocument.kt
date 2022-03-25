@@ -13,7 +13,7 @@ data class ExtraExpenseDocument(
     val id: String? = null,
     val title: String,
     val description: String? = null,
-    val user_id: String,
+    val userId: String,
     val value: BigDecimal,
     val month: Int,
     val year: Int,
@@ -21,11 +21,23 @@ data class ExtraExpenseDocument(
     val created_at: LocalDateTime? = null,
     val updated_at: LocalDateTime? = null,
 ) {
+    constructor(extraExpense: ExtraExpense) : this(
+        id = extraExpense.id,
+        title = extraExpense.title,
+        description = extraExpense.description,
+        month = extraExpense.month,
+        year = extraExpense.year,
+        userId = extraExpense.userId,
+        value = extraExpense.value,
+        created_at = extraExpense.created_at,
+        updated_at = extraExpense.updated_at
+    )
+
     fun toDomain() = ExtraExpense(
         id = id,
         title = title,
         description = description,
-        user_id = user_id,
+        userId = userId,
         value = value,
         month = month,
         year = year,

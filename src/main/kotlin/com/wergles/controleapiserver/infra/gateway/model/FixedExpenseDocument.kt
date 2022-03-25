@@ -13,17 +13,27 @@ data class FixedExpenseDocument(
     val id: String? = null,
     val title: String,
     val description: String? = null,
-    val user_id: String,
+    val userId: String,
     val value: BigDecimal,
     @CreatedDate
     val created_at: LocalDateTime? = null,
     val updated_at: LocalDateTime? = null,
 ) {
+    constructor(fixedExpense: FixedExpense) : this(
+        id = fixedExpense.id,
+        title = fixedExpense.title,
+        description = fixedExpense.description,
+        userId = fixedExpense.userId,
+        value = fixedExpense.value,
+        created_at = fixedExpense.created_at,
+        updated_at = fixedExpense.updated_at
+    )
+
     fun toDomain() = FixedExpense(
         id = id,
         title = title,
         description = description,
-        user_id = user_id,
+        userId = userId,
         value = value,
         created_at = created_at,
         updated_at = updated_at

@@ -7,7 +7,7 @@ data class FixedEarning(
     val id: String? = null,
     val title: String,
     val description: String? = null,
-    val user_id: String,
+    val userId: String,
     val value: BigDecimal,
     val created_at: LocalDateTime? = null,
     val updated_at: LocalDateTime? = null,

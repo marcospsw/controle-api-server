@@ -13,7 +13,7 @@ data class ExtraEarningDocument(
     val id: String? = null,
     val title: String,
     val description: String? = null,
-    val user_id: String,
+    val userId: String,
     val value: BigDecimal,
     val month: Int,
     val year: Int,
@@ -21,11 +21,23 @@ data class ExtraEarningDocument(
     val created_at: LocalDateTime? = null,
     val updated_at: LocalDateTime? = null,
 ) {
+    constructor(extraEarning: ExtraEarning) : this(
+        id = extraEarning.id,
+        title = extraEarning.title,
+        description = extraEarning.description,
+        month = extraEarning.month,
+        year = extraEarning.year,
+        userId = extraEarning.userId,
+        value = extraEarning.value,
+        created_at = extraEarning.created_at,
+        updated_at = extraEarning.updated_at
+    )
+
     fun toDomain() = ExtraEarning(
         id = id,
         title = title,
         description = description,
-        user_id = user_id,
+        userId = userId,
         value = value,
         month = month,
         year = year,
