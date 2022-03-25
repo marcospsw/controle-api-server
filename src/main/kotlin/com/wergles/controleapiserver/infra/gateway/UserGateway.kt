@@ -29,7 +29,7 @@ class UserGateway(private val userRepository: UserRepository) : IUserGateway {
         } ?: throw BadGatewayException("User Gateway -> Error on save user")
     }
 
-    override suspend fun editUser(id: String, newUser: User): User {
+    override suspend fun updateUser(id: String, newUser: User): User {
         logger.info("User Gateway -> Starting edit user")
         val user = userRepository.findById(id).awaitSingleOrNull()
             .also { logger.info("User Gateway -> Successfully get user") }

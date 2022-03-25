@@ -11,14 +11,15 @@ data class UserResponse(
     val avatar_url: String? = null,
     val created_at: LocalDateTime? = null,
     val updated_at: LocalDateTime? = null
-) {
-    fun toSuccess(user: User) = UserResponse(
-        id = user.id,
-        name = user.name,
-        email = user.email,
-        cpf = user.cpf,
-        avatar_url = user.avatar_url,
-        created_at = user.created_at,
-        updated_at = user.updated_at
-    )
-}
+)
+
+fun User.toResponse() = UserResponse(
+    id = id,
+    name = name,
+    email = email,
+    cpf = cpf,
+    avatar_url = avatar_url,
+    created_at = created_at,
+    updated_at = updated_at
+)
+
