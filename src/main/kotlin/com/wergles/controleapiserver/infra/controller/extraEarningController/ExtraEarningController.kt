@@ -1,0 +1,3 @@
+package com.wergles.controleapiserver.infra.controller.extraEarningController
+
+class ExtraEarningController
