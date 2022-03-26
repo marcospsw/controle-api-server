@@ -9,14 +9,7 @@ import com.wergles.controleapiserver.infra.controller.userController.dto.CreateU
 import com.wergles.controleapiserver.infra.controller.userController.dto.UpdateUserRequestDTO
 import com.wergles.controleapiserver.infra.controller.userController.dto.UserResponseDTO
 import com.wergles.controleapiserver.infra.controller.userController.dto.toResponse
-import org.springframework.web.bind.annotation.DeleteMapping
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.PutMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/account")
@@ -30,9 +23,9 @@ class UserController(
 
     @GetMapping("/{id}")
     fun getUser(@PathVariable("id") id: String): UserResponseDTO {
-        logger.info("User Controller -> Starting finding user")
+        logger.info("User Controller -> Starting get user")
         return getUserByIdUseCase.execute(id).toResponse().also {
-            logger.info("User Controller -> Successfully finding user")
+            logger.info("User Controller -> Successfully get user")
         }
     }
 
@@ -54,9 +47,9 @@ class UserController(
 
     @DeleteMapping("/{id}")
     fun deleteUser(@PathVariable("id") id: String) {
-        logger.info("User Controller -> Starting finding user")
+        logger.info("User Controller -> Starting delete user")
         return deleteUserUseCase.execute(id).also {
-            logger.info("User Controller -> Successfully finding user")
+            logger.info("User Controller -> Successfully delete user")
         }
     }
 }
