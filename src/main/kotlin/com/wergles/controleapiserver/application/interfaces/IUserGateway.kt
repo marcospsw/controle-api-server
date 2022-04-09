@@ -7,4 +7,5 @@ interface IUserGateway {
     fun createUser(user: User): User
     fun updateUser(id: String, newUser: User): User
     fun deleteUser(id: String)
+    fun getAutheticatedUser(): User
 }

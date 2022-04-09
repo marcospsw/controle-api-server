@@ -8,6 +8,7 @@ import com.wergles.controleapiserver.domain.exception.NotFoundException
 import com.wergles.controleapiserver.infra.gateway.model.UserDocument
 import com.wergles.controleapiserver.infra.gateway.repository.UserRepository
 import org.springframework.data.repository.findByIdOrNull
+import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
@@ -20,7 +21,7 @@ class UserGateway(private val userRepository: UserRepository) : IUserGateway, Us
 
     override fun getUserById(id: String): User {
         logger.info("User Gateway -> Starting get users")
-        return userRepository.findByIdOrNull(id)?.toDomain()
+        return userRepository.findByIdOrNull(getAutheticatedUser().id)?.toDomain()
             .also { logger.info("User Gateway -> Successfully get users") }
             ?: throw NotFoundException("User as not found")
     }
@@ -62,5 +63,13 @@ class UserGateway(private val userRepository: UserRepository) : IUserGateway, Us
             .also { logger.info("User Gateway -> Successfully get users") }
             ?: throw NotFoundException("User as not found")
         return UserDetail(user)
+    }
+
+    override fun getAutheticatedUser(): User {
+        logger.info("User Gateway -> Starting get user details")
+        val email = SecurityContextHolder.getContext().authentication.principal.toString()
+        return userRepository.findByEmail(email)?.toDomain()
+            .also { logger.info("User Gateway -> Successfully get users") }
+            ?: throw NotFoundException("User as not found")
     }
 }
