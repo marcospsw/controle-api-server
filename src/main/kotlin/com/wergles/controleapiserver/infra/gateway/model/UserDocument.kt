@@ -1,6 +1,5 @@
 package com.wergles.controleapiserver.infra.gateway.model
 
-import com.wergles.controleapiserver.common.utils.Md5Hash
 import com.wergles.controleapiserver.domain.entity.User
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.Id
@@ -28,7 +27,7 @@ data class UserDocument(
         name = user.name,
         email = user.email,
         cpf = user.cpf,
-        password = Md5Hash().md5(user.password),
+        password = user.password,
         avatar_url = user.avatar_url,
         created_at = user.created_at,
         updated_at = user.updated_at
