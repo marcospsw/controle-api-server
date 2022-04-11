@@ -7,9 +7,10 @@ import com.wergles.controleapiserver.domain.entity.User
 class GetUserByIdUseCase(private val userGateway: IUserGateway) {
     private val logger = Logger(this.javaClass)
 
-    fun execute(id: String): User {
+    fun execute(): User {
         logger.info("Get User UseCase -> Starting get user")
-        return userGateway.getUserById(id).also {
+        val user = userGateway.getAuthenticatedUser()
+        return userGateway.getUserById(user.id).also {
             logger.info("Get User UseCase -> Successfully get user")
         }
     }

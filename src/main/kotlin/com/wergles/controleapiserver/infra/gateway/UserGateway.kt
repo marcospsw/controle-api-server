@@ -3,6 +3,7 @@ package com.wergles.controleapiserver.infra.gateway
 import com.wergles.controleapiserver.application.interfaces.IUserGateway
 import com.wergles.controleapiserver.common.Logger
 import com.wergles.controleapiserver.domain.entity.User
+import com.wergles.controleapiserver.domain.entity.UserAuthenticated
 import com.wergles.controleapiserver.domain.entity.UserDetail
 import com.wergles.controleapiserver.domain.exception.NotFoundException
 import com.wergles.controleapiserver.infra.gateway.model.UserDocument
@@ -21,7 +22,7 @@ class UserGateway(private val userRepository: UserRepository) : IUserGateway, Us
 
     override fun getUserById(id: String): User {
         logger.info("User Gateway -> Starting get users")
-        return userRepository.findByIdOrNull(getAutheticatedUser().id)?.toDomain()
+        return userRepository.findByIdOrNull(id)?.toDomain()
             .also { logger.info("User Gateway -> Successfully get users") }
             ?: throw NotFoundException("User as not found")
     }
@@ -36,8 +37,7 @@ class UserGateway(private val userRepository: UserRepository) : IUserGateway, Us
 
     override fun updateUser(id: String, newUser: User): User {
         logger.info("User Gateway -> Starting edit user")
-        val user = userRepository.findByIdOrNull(id)
-            .also { logger.info("User Gateway -> Successfully get user") }
+        val user = userRepository.findByIdOrNull(id).also { logger.info("User Gateway -> Successfully get user") }
             ?: throw NotFoundException("User as not found")
         return userRepository.save(
             user.copy(
@@ -47,29 +47,36 @@ class UserGateway(private val userRepository: UserRepository) : IUserGateway, Us
                 avatar_url = newUser.avatar_url,
                 updated_at = LocalDateTime.now()
             )
-        ).toDomain()
-            .also { logger.info("User Gateway -> Successfully edit user") }
+        ).toDomain().also { logger.info("User Gateway -> Successfully edit user") }
     }
 
     override fun deleteUser(id: String) {
         logger.info("User Gateway -> Starting delete user")
-        userRepository.deleteById(id)
-            .also { logger.info("User Gateway -> Successfully delete user") }
+        userRepository.deleteById(id).also { logger.info("User Gateway -> Successfully delete user") }
     }
 
     override fun loadUserByUsername(email: String): UserDetails {
         logger.info("User Gateway -> Starting get user details")
-        val user = userRepository.findByEmail(email)?.toDomain()
-            .also { logger.info("User Gateway -> Successfully get users") }
-            ?: throw NotFoundException("User as not found")
+        val user = userRepository.findByEmail(email)?.toDomain().also {
+            logger.info("User Gateway -> Successfully get users")
+        } ?: throw NotFoundException("User as not found")
         return UserDetail(user)
     }
 
-    override fun getAutheticatedUser(): User {
+    override fun getAuthenticatedUser(): UserAuthenticated {
         logger.info("User Gateway -> Starting get user details")
         val email = SecurityContextHolder.getContext().authentication.principal.toString()
-        return userRepository.findByEmail(email)?.toDomain()
-            .also { logger.info("User Gateway -> Successfully get users") }
-            ?: throw NotFoundException("User as not found")
+        val user =
+            userRepository.findByEmail(email)?.toDomain().also { logger.info("User Gateway -> Successfully get users") }
+                ?: throw NotFoundException("User as not found")
+        return UserAuthenticated(
+            id = user.id!!,
+            name = user.name,
+            email = user.email,
+            cpf = user.cpf,
+            password = user.password,
+            avatar_url = user.avatar_url,
+            created_at = user.created_at!!
+        )
     }
 }

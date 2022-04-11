@@ -21,8 +21,7 @@ class SecurityConfiguration(
     override fun configure(http: HttpSecurity?) {
         http?.csrf()?.disable()
             ?.authorizeRequests()
-//            ?.antMatchers(HttpMethod.POST, "/logian")?.permitAll()
-            ?.antMatchers(HttpMethod.POST, "/account/create")?.permitAll()
+            ?.antMatchers(HttpMethod.POST, "/account")?.permitAll()
             ?.anyRequest()?.authenticated()?.and()
         http?.addFilterBefore(
             JWTAuthenticationFilter(authManager = authenticationManager(), jwtUtils = jwtUtils),

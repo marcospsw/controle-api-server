@@ -9,7 +9,13 @@ import com.wergles.controleapiserver.infra.controller.userController.dto.CreateU
 import com.wergles.controleapiserver.infra.controller.userController.dto.UpdateUserRequestDTO
 import com.wergles.controleapiserver.infra.controller.userController.dto.UserResponseDTO
 import com.wergles.controleapiserver.infra.controller.userController.dto.toResponse
-import org.springframework.web.bind.annotation.*
+import org.springframework.web.bind.annotation.DeleteMapping
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
+import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/account")
@@ -21,15 +27,15 @@ class UserController(
 ) {
     private val logger = Logger(this.javaClass)
 
-    @GetMapping("/{id}")
-    fun getUser(@PathVariable("id") id: String): UserResponseDTO {
+    @GetMapping
+    fun getUser(): UserResponseDTO {
         logger.info("User Controller -> Starting get user")
-        return getUserByIdUseCase.execute(id).toResponse().also {
+        return getUserByIdUseCase.execute().toResponse().also {
             logger.info("User Controller -> Successfully get user")
         }
     }
 
-    @PostMapping("/create")
+    @PostMapping
     fun createUser(@RequestBody userRequest: CreateUserRequestDTO): UserResponseDTO {
         logger.info("User Controller -> Starting create user")
         return createUserUseCase.execute(userRequest.toDomain()).toResponse().also {
@@ -37,18 +43,18 @@ class UserController(
         }
     }
 
-    @PutMapping("/{id}")
-    fun updateUser(@PathVariable("id") id: String, @RequestBody userRequest: UpdateUserRequestDTO): UserResponseDTO {
+    @PutMapping
+    fun updateUser(@RequestBody userRequest: UpdateUserRequestDTO): UserResponseDTO {
         logger.info("User Controller -> Starting update user")
-        return updateUserUseCase.execute(id, userRequest.toDomain()).toResponse().also {
+        return updateUserUseCase.execute(userRequest.toDomain()).toResponse().also {
             logger.info("User Controller -> Successfully update user")
         }
     }
 
-    @DeleteMapping("/{id}")
-    fun deleteUser(@PathVariable("id") id: String) {
+    @DeleteMapping
+    fun deleteUser() {
         logger.info("User Controller -> Starting delete user")
-        return deleteUserUseCase.execute(id).also {
+        return deleteUserUseCase.execute().also {
             logger.info("User Controller -> Successfully delete user")
         }
     }
