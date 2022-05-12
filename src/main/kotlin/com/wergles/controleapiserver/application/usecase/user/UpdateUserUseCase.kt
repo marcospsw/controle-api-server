@@ -9,8 +9,8 @@ class UpdateUserUseCase(private val userGateway: IUserGateway) {
 
     fun execute(newUser: User): User {
         logger.info("Edi User UseCase -> Starting update user")
-        val user = userGateway.getAuthenticatedUser()
-        return userGateway.updateUser(user.id, newUser).also {
+        val userId = userGateway.getAuthenticatedUserId()
+        return userGateway.updateUser(userId, newUser).also {
             logger.info("Get User UseCase -> Successfully update user")
         }
     }

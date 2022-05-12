@@ -9,8 +9,8 @@ class GetUserByIdUseCase(private val userGateway: IUserGateway) {
 
     fun execute(): User {
         logger.info("Get User UseCase -> Starting get user")
-        val user = userGateway.getAuthenticatedUser()
-        return userGateway.getUserById(user.id).also {
+        val userId = userGateway.getAuthenticatedUserId()
+        return userGateway.getUserById(userId).also {
             logger.info("Get User UseCase -> Successfully get user")
         }
     }

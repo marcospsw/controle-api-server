@@ -13,7 +13,8 @@ import java.time.LocalDateTime
 
 @Service
 class EarningGateway(
-    private val earningRepository: EarningRepository
+    private val earningRepository: EarningRepository,
+    private val userGateway: UserGateway
 ) : IEarningGateway {
     val logger = Logger(this.javaClass)
 
@@ -24,8 +25,9 @@ class EarningGateway(
         } ?: throw NotFoundException("Earning as not found")
     }
 
-    override fun getAllEarningsByUserId(userId: String): List<Earning> {
+    override fun getAllEarningsByUserId(): List<Earning> {
         logger.info("Earning Gateway -> Starting get EarningsByUserId")
+        val userId = userGateway.getAuthenticatedUserId()
         return earningRepository.getAllByUserId(userId)?.map {
             it.toDomain()
         }.also {
@@ -33,8 +35,9 @@ class EarningGateway(
         } ?: throw NotFoundException("Earnings as not found")
     }
 
-    override fun getAllEarningsByUserIdAndMonth(userId: String, month: Int): List<Earning> {
+    override fun getAllEarningsByUserIdAndMonth(month: Int): List<Earning> {
         logger.info("Earning Gateway -> Starting get EarningsByUserIdAndMonth")
+        val userId = userGateway.getAuthenticatedUserId()
         return earningRepository.getAllByUserIdAndMonth(userId, month)?.map {
             it.toDomain()
         }.also {
@@ -42,8 +45,9 @@ class EarningGateway(
         } ?: throw NotFoundException("Earnings as not found")
     }
 
-    override fun getAllEarningsByUserIdAndYear(userId: String, year: Int): List<Earning> {
+    override fun getAllEarningsByUserIdAndYear(year: Int): List<Earning> {
         logger.info("Earning Gateway -> Starting get EarningsByUserIdAndYear")
+        val userId = userGateway.getAuthenticatedUserId()
         return earningRepository.getAllByUserIdAndYear(userId, year)?.map {
             it.toDomain()
         }.also {
@@ -51,8 +55,9 @@ class EarningGateway(
         } ?: throw NotFoundException("Earnings as not found")
     }
 
-    override fun getAllEarningsByUserIdAndFixedIsTrue(userId: String): List<Earning> {
+    override fun getAllEarningsByUserIdAndFixedIsTrue(): List<Earning> {
         logger.info("Earning Gateway -> Starting get EarningsByUserIdAndFixed")
+        val userId = userGateway.getAuthenticatedUserId()
         return earningRepository.getAllByUserIdAndFixedIsTrue(userId)?.map {
             it.toDomain()
         }.also {

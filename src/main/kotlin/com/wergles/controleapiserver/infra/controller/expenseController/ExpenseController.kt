@@ -33,7 +33,7 @@ class ExpenseController(
     @GetMapping("/{userId}")
     fun getAllExpensesByUser(@PathVariable("userId") userId: String): List<ExpenseResponseDTO> {
         logger.info("Expense Controller -> Starting finding Expenses")
-        return getAllExpensesByUserIdUseCase.execute(userId).map { it.toResponse() }.also {
+        return getAllExpensesByUserIdUseCase.execute().map { it.toResponse() }.also {
             logger.info("Expense Controller -> Successfully finding Expenses")
         }
     }
@@ -44,7 +44,7 @@ class ExpenseController(
         @PathVariable("month") month: Int
     ): List<ExpenseResponseDTO> {
         logger.info("Expense Controller -> Starting finding Expenses")
-        return getAllExpensesByUserIdAndMonthUseCase.execute(userId, month).map { it.toResponse() }.also {
+        return getAllExpensesByUserIdAndMonthUseCase.execute(month).map { it.toResponse() }.also {
             logger.info("Expense Controller -> Successfully finding Expenses")
         }
     }
@@ -55,7 +55,7 @@ class ExpenseController(
         @PathVariable("year") year: Int
     ): List<ExpenseResponseDTO> {
         logger.info("Expense Controller -> Starting finding Expenses")
-        return getAllExpensesByUserIdAndYearUseCase.execute(userId, year).map { it.toResponse() }.also {
+        return getAllExpensesByUserIdAndYearUseCase.execute(year).map { it.toResponse() }.also {
             logger.info("Expense Controller -> Successfully finding Expenses")
         }
     }
@@ -65,7 +65,7 @@ class ExpenseController(
         @PathVariable("userId") userId: String,
     ): List<ExpenseResponseDTO> {
         logger.info("Expense Controller -> Starting finding Expenses")
-        return getAllExpensesByUserIdAndFixedIsTrueUseCase.execute(userId).map { it.toResponse() }.also {
+        return getAllExpensesByUserIdAndFixedIsTrueUseCase.execute().map { it.toResponse() }.also {
             logger.info("Expense Controller -> Successfully finding Expenses")
         }
     }

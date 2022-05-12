@@ -7,9 +7,9 @@ import com.wergles.controleapiserver.domain.entity.Earning
 class GetAllEarningsByUserIdAndYearUseCase(private val earningGateway: IEarningGateway) {
     private val logger = Logger(this.javaClass)
 
-    fun execute(userId: String, year: Int): List<Earning> {
+    fun execute(year: Int): List<Earning> {
         logger.info("GetAll EarningsByUserAndYear UseCase -> Starting get Earnings")
-        return earningGateway.getAllEarningsByUserIdAndYear(userId, year).also {
+        return earningGateway.getAllEarningsByUserIdAndYear(year).also {
             logger.info("GetAll EarningsByUserAndYear UseCase -> Successfully get Earnings")
         }
     }

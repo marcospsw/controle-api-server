@@ -7,9 +7,9 @@ import com.wergles.controleapiserver.domain.entity.Expense
 class GetAllExpensesByUserIdUseCase(private val expenseGateway: IExpenseGateway) {
     private val logger = Logger(this.javaClass)
 
-    fun execute(userId: String): List<Expense> {
+    fun execute(): List<Expense> {
         logger.info("GetAll ExpenseByUser UseCase -> Starting get Expenses")
-        return expenseGateway.getAllExpensesByUserId(userId).also {
+        return expenseGateway.getAllExpensesByUserId().also {
             logger.info("GetAll ExpenseByUser UseCase -> Successfully get Expenses")
         }
     }

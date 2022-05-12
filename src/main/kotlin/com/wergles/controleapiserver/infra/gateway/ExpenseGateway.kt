@@ -13,7 +13,8 @@ import java.time.LocalDateTime
 
 @Service
 class ExpenseGateway(
-    private val expensesRepository: ExpenseRepository
+    private val expensesRepository: ExpenseRepository,
+    private val userGateway: UserGateway
 ) : IExpenseGateway {
     val logger = Logger(this.javaClass)
 
@@ -24,8 +25,9 @@ class ExpenseGateway(
         } ?: throw NotFoundException("Expense as not found")
     }
 
-    override fun getAllExpensesByUserId(userId: String): List<Expense> {
+    override fun getAllExpensesByUserId(): List<Expense> {
         logger.info("Expense Gateway -> Starting get ExpenseById")
+        val userId = userGateway.getAuthenticatedUserId()
         return expensesRepository.getAllByUserId(userId)?.map {
             it.toDomain()
         }.also {
@@ -33,8 +35,9 @@ class ExpenseGateway(
         } ?: throw NotFoundException("Expenses as not found")
     }
 
-    override fun getAllExpensesByUserIdAndMonth(userId: String, month: Int): List<Expense> {
+    override fun getAllExpensesByUserIdAndMonth(month: Int): List<Expense> {
         logger.info("Expense Gateway -> Starting get ExpenseByUserIdAndMonth")
+        val userId = userGateway.getAuthenticatedUserId()
         return expensesRepository.getAllByUserIdAndMonth(userId, month)?.map {
             it.toDomain()
         }.also {
@@ -42,8 +45,9 @@ class ExpenseGateway(
         } ?: throw NotFoundException("Expenses as not found")
     }
 
-    override fun getAllExpensesByUserIdAndYear(userId: String, year: Int): List<Expense> {
+    override fun getAllExpensesByUserIdAndYear(year: Int): List<Expense> {
         logger.info("Expense Gateway -> Starting get ExpenseByUserIdAndYear")
+        val userId = userGateway.getAuthenticatedUserId()
         return expensesRepository.getAllByUserIdAndYear(userId, year)?.map {
             it.toDomain()
         }.also {
@@ -51,8 +55,9 @@ class ExpenseGateway(
         } ?: throw NotFoundException("Expenses as not found")
     }
 
-    override fun getAllExpensesByUserIdAndFixedIsTrue(userId: String): List<Expense> {
+    override fun getAllExpensesByUserIdAndFixedIsTrue(): List<Expense> {
         logger.info("Expense Gateway -> Starting get ExpenseByUserIdAndFixed")
+        val userId = userGateway.getAuthenticatedUserId()
         return expensesRepository.getAllByUserIdAndFixedIsTrue(userId)?.map {
             it.toDomain()
         }.also {

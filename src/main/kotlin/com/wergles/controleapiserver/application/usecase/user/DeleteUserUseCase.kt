@@ -8,8 +8,8 @@ class DeleteUserUseCase(private val userGateway: IUserGateway) {
 
     fun execute() {
         logger.info("Delete User UseCase -> Starting delete user")
-        val user = userGateway.getAuthenticatedUser()
-        return userGateway.deleteUser(user.id).also {
+        val userId = userGateway.getAuthenticatedUserId()
+        return userGateway.deleteUser(userId).also {
             logger.info("Delete User UseCase -> Successfully delete user")
         }
     }

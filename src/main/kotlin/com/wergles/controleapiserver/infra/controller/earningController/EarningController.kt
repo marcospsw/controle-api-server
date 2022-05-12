@@ -33,7 +33,7 @@ class EarningController(
     @GetMapping("/{userId}")
     fun getEarningByUser(@PathVariable("userId") userId: String): List<EarningResponseDTO> {
         logger.info("Earning Controller -> Starting finding Earnings")
-        return getAllEarningsByUserIdUseCase.execute(userId).map { it.toResponse() }.also {
+        return getAllEarningsByUserIdUseCase.execute().map { it.toResponse() }.also {
             logger.info("Earning Controller -> Successfully finding Earnings")
         }
     }
@@ -44,7 +44,7 @@ class EarningController(
         @PathVariable("month") month: Int
     ): List<EarningResponseDTO> {
         logger.info("Earning Controller -> Starting finding Earnings")
-        return getAllEarningsByUserIdAndMonthUseCase.execute(userId, month).map { it.toResponse() }.also {
+        return getAllEarningsByUserIdAndMonthUseCase.execute(month).map { it.toResponse() }.also {
             logger.info("Earning Controller -> Successfully finding Earnings")
         }
     }
@@ -55,7 +55,7 @@ class EarningController(
         @PathVariable("year") year: Int
     ): List<EarningResponseDTO> {
         logger.info("Earning Controller -> Starting finding Earnings")
-        return getAllEarningsByUserIdAndYearUseCase.execute(userId, year).map { it.toResponse() }.also {
+        return getAllEarningsByUserIdAndYearUseCase.execute(year).map { it.toResponse() }.also {
             logger.info("Earning Controller -> Successfully finding Earnings")
         }
     }
@@ -65,7 +65,7 @@ class EarningController(
         @PathVariable("userId") userId: String,
     ): List<EarningResponseDTO> {
         logger.info("Earning Controller -> Starting finding Earnings")
-        return getAllEarningsByUserIdAndFixedIsTrueUseCase.execute(userId).map { it.toResponse() }.also {
+        return getAllEarningsByUserIdAndFixedIsTrueUseCase.execute().map { it.toResponse() }.also {
             logger.info("Earning Controller -> Successfully finding Earnings")
         }
     }
