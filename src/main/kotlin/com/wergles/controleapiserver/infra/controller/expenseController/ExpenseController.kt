@@ -22,25 +22,24 @@ class ExpenseController(
 ) {
     private val logger = Logger(this.javaClass)
 
-    @GetMapping("/{id}")
-    fun getExpense(@PathVariable("id") id: String): ExpenseResponseDTO {
-        logger.info("Expense Controller -> Starting finding Expense")
-        return getExpenseByIdUseCase.execute(id).toResponse().also {
-            logger.info("Expense Controller -> Successfully finding Expense")
-        }
-    }
-
-    @GetMapping("/{userId}")
-    fun getAllExpensesByUser(@PathVariable("userId") userId: String): List<ExpenseResponseDTO> {
+    @GetMapping
+    fun getAllExpensesByUser(): List<ExpenseResponseDTO> {
         logger.info("Expense Controller -> Starting finding Expenses")
         return getAllExpensesByUserIdUseCase.execute().map { it.toResponse() }.also {
             logger.info("Expense Controller -> Successfully finding Expenses")
         }
     }
 
-    @GetMapping("/{userId}/{month}")
+    @GetMapping("/{id}")
+    fun getExpenseById(@PathVariable("id") id: String): ExpenseResponseDTO {
+        logger.info("Expense Controller -> Starting finding Expense")
+        return getExpenseByIdUseCase.execute(id).toResponse().also {
+            logger.info("Expense Controller -> Successfully finding Expense")
+        }
+    }
+
+    @GetMapping("/month/{month}")
     fun getAllExpensesByUserAndMonth(
-        @PathVariable("userId") userId: String,
         @PathVariable("month") month: Int
     ): List<ExpenseResponseDTO> {
         logger.info("Expense Controller -> Starting finding Expenses")
@@ -49,9 +48,8 @@ class ExpenseController(
         }
     }
 
-    @GetMapping("/{userId}/{year}")
+    @GetMapping("/year/{year}")
     fun getAllExpensesByUserAndYear(
-        @PathVariable("userId") userId: String,
         @PathVariable("year") year: Int
     ): List<ExpenseResponseDTO> {
         logger.info("Expense Controller -> Starting finding Expenses")
@@ -60,10 +58,8 @@ class ExpenseController(
         }
     }
 
-    @GetMapping("/{userId}/fixed")
-    fun getAllExpensesByUserAndFixed(
-        @PathVariable("userId") userId: String,
-    ): List<ExpenseResponseDTO> {
+    @GetMapping("/fixed")
+    fun getAllExpensesByUserAndFixed(): List<ExpenseResponseDTO> {
         logger.info("Expense Controller -> Starting finding Expenses")
         return getAllExpensesByUserIdAndFixedIsTrueUseCase.execute().map { it.toResponse() }.also {
             logger.info("Expense Controller -> Successfully finding Expenses")

@@ -22,6 +22,14 @@ class EarningController(
 ) {
     private val logger = Logger(this.javaClass)
 
+    @GetMapping
+    fun getEarningByUser(): List<EarningResponseDTO> {
+        logger.info("Earning Controller -> Starting finding Earnings")
+        return getAllEarningsByUserIdUseCase.execute().map { it.toResponse() }.also {
+            logger.info("Earning Controller -> Successfully finding Earnings")
+        }
+    }
+
     @GetMapping("/{id}")
     fun getEarning(@PathVariable("id") id: String): EarningResponseDTO {
         logger.info("Earning Controller -> Starting finding Earning")
@@ -30,17 +38,8 @@ class EarningController(
         }
     }
 
-    @GetMapping("/{userId}")
-    fun getEarningByUser(@PathVariable("userId") userId: String): List<EarningResponseDTO> {
-        logger.info("Earning Controller -> Starting finding Earnings")
-        return getAllEarningsByUserIdUseCase.execute().map { it.toResponse() }.also {
-            logger.info("Earning Controller -> Successfully finding Earnings")
-        }
-    }
-
-    @GetMapping("/{userId}/{month}")
+    @GetMapping("/month/{month}")
     fun getAllEarningByUserAndMonth(
-        @PathVariable("userId") userId: String,
         @PathVariable("month") month: Int
     ): List<EarningResponseDTO> {
         logger.info("Earning Controller -> Starting finding Earnings")
@@ -49,9 +48,8 @@ class EarningController(
         }
     }
 
-    @GetMapping("/{userId}/{year}")
+    @GetMapping("/year/{year}")
     fun getAllEarningByUserAndYear(
-        @PathVariable("userId") userId: String,
         @PathVariable("year") year: Int
     ): List<EarningResponseDTO> {
         logger.info("Earning Controller -> Starting finding Earnings")
@@ -60,10 +58,8 @@ class EarningController(
         }
     }
 
-    @GetMapping("/{userId}/fixed")
-    fun getAllEarningByUserAndFixed(
-        @PathVariable("userId") userId: String,
-    ): List<EarningResponseDTO> {
+    @GetMapping("/fixed")
+    fun getAllEarningByUserAndFixed(): List<EarningResponseDTO> {
         logger.info("Earning Controller -> Starting finding Earnings")
         return getAllEarningsByUserIdAndFixedIsTrueUseCase.execute().map { it.toResponse() }.also {
             logger.info("Earning Controller -> Successfully finding Earnings")
