@@ -1,9 +1,7 @@
 package com.wergles.controleapiserver.application.config
 
-import com.wergles.controleapiserver.application.usecase.extraEarning.*
-import com.wergles.controleapiserver.application.usecase.extraExpense.*
-import com.wergles.controleapiserver.application.usecase.fixedEarning.*
-import com.wergles.controleapiserver.application.usecase.fixedExpense.*
+import com.wergles.controleapiserver.application.usecase.earning.*
+import com.wergles.controleapiserver.application.usecase.expense.*
 import com.wergles.controleapiserver.application.usecase.user.CreateUserUseCase
 import com.wergles.controleapiserver.application.usecase.user.DeleteUserUseCase
 import com.wergles.controleapiserver.application.usecase.user.GetUserByIdUseCase
@@ -27,100 +25,58 @@ class UseCaseConfig {
     fun deleteUserUseCase(userGateway: UserGateway) = DeleteUserUseCase(userGateway = userGateway)
 
     @Bean
-    fun createFixedExpenseUseCase(fixedExpenseGateway: FixedExpenseGateway) =
-        CreateFixedExpenseUseCase(fixedExpenseGateway = fixedExpenseGateway)
+    fun createEarningUseCase(earningGateway: EarningGateway) =
+        CreateEarningUseCase(earningGateway = earningGateway)
 
     @Bean
-    fun deleteFixedExpenseUseCase(fixedExpenseGateway: FixedExpenseGateway) =
-        DeleteFixedExpenseUseCase(fixedExpenseGateway = fixedExpenseGateway)
+    fun deleteEarningUseCase(earningGateway: EarningGateway) =
+        DeleteEarningUseCase(earningGateway = earningGateway)
 
     @Bean
-    fun updateFixedExpenseUseCase(fixedExpenseGateway: FixedExpenseGateway) =
-        UpdateFixedExpenseUseCase(fixedExpenseGateway = fixedExpenseGateway)
+    fun updateEarningUseCase(earningGateway: EarningGateway) =
+        UpdateEarningUseCase(earningGateway = earningGateway)
 
     @Bean
-    fun getFixedExpenseByIdUseCase(fixedExpenseGateway: FixedExpenseGateway) =
-        GetFixedExpenseByIdUseCase(fixedExpenseGateway = fixedExpenseGateway)
+    fun getEarningByIdUseCase(earningGateway: EarningGateway) =
+        GetEarningByIdUseCase(earningGateway = earningGateway)
 
     @Bean
-    fun getAllFixedExpensesByUserIdUseCase(fixedExpenseGateway: FixedExpenseGateway) =
-        GetAllFixedExpensesByUserIdUseCase(fixedExpenseGateway = fixedExpenseGateway)
+    fun getAllEarningsByUserIdUseCase(earningGateway: EarningGateway) =
+        GetAllEarningsByUserIdUseCase(earningGateway = earningGateway)
 
     @Bean
-    fun createFixedEarningUseCase(fixedEarningGateway: FixedEarningGateway) =
-        CreateFixedEarningUseCase(fixedEarningGateway = fixedEarningGateway)
+    fun getAllEarningsByUserIdAndMonthUseCase(earningGateway: EarningGateway) =
+        GetAllEarningsByUserIdAndMonthUseCase(earningGateway = earningGateway)
 
     @Bean
-    fun deleteFixedEarningUseCase(fixedEarningGateway: FixedEarningGateway) =
-        DeleteFixedEarningUseCase(fixedEarningGateway = fixedEarningGateway)
+    fun getAllEarningsByUserIdAndYearUseCase(earningGateway: EarningGateway) =
+        GetAllEarningsByUserIdAndYearUseCase(earningGateway = earningGateway)
 
     @Bean
-    fun updateFixedEarningUseCase(fixedEarningGateway: FixedEarningGateway) =
-        UpdateFixedEarningUseCase(fixedEarningGateway = fixedEarningGateway)
+    fun createExpenseUseCase(expenseGateway: ExpenseGateway) =
+        CreateExpenseUseCase(expenseGateway = expenseGateway)
 
     @Bean
-    fun getFixedEarningByIdUseCase(fixedEarningGateway: FixedEarningGateway) =
-        GetFixedEarningByIdUseCase(fixedEarningGateway = fixedEarningGateway)
+    fun deleteExpenseUseCase(expenseGateway: ExpenseGateway) =
+        DeleteExpenseUseCase(expenseGateway = expenseGateway)
 
     @Bean
-    fun getAllFixedEarningsByUserIdUseCase(fixedEarningGateway: FixedEarningGateway) =
-        GetAllFixedEarningsByUserIdUseCase(fixedEarningGateway = fixedEarningGateway)
+    fun updateExpenseUseCase(expenseGateway: ExpenseGateway) =
+        UpdateExpenseUseCase(expenseGateway = expenseGateway)
 
     @Bean
-    fun createExtraEarningUseCase(extraEarningGateway: ExtraEarningGateway) =
-        CreateExtraEarningUseCase(extraEarningGateway = extraEarningGateway)
+    fun getExpenseByIdUseCase(expenseGateway: ExpenseGateway) =
+        GetExpenseByIdUseCase(expenseGateway = expenseGateway)
 
     @Bean
-    fun deleteExtraEarningUseCase(extraEarningGateway: ExtraEarningGateway) =
-        DeleteExtraEarningUseCase(extraEarningGateway = extraEarningGateway)
+    fun getAllExpensesByUserIdUseCase(expenseGateway: ExpenseGateway) =
+        GetAllExpensesByUserIdUseCase(expenseGateway = expenseGateway)
 
     @Bean
-    fun updateExtraEarningUseCase(extraEarningGateway: ExtraEarningGateway) =
-        UpdateExtraEarningUseCase(extraEarningGateway = extraEarningGateway)
+    fun getAllExpensesByUserIdAndMonthUseCase(expenseGateway: ExpenseGateway) =
+        GetAllExpensesByUserIdAndMonthUseCase(expenseGateway = expenseGateway)
 
     @Bean
-    fun getExtraEarningByIdUseCase(extraEarningGateway: ExtraEarningGateway) =
-        GetExtraEarningByIdUseCase(extraEarningGateway = extraEarningGateway)
-
-    @Bean
-    fun getAllExtraEarningsByUserIdUseCase(extraEarningGateway: ExtraEarningGateway) =
-        GetAllExtraEarningsByUserIdUseCase(extraEarningGateway = extraEarningGateway)
-
-    @Bean
-    fun getAllExtraEarningsByUserIdAndMonthUseCase(extraEarningGateway: ExtraEarningGateway) =
-        GetAllExtraEarningsByUserIdAndMonthUseCase(extraEarningGateway = extraEarningGateway)
-
-    @Bean
-    fun getAllExtraEarningsByUserIdAndYearUseCase(extraEarningGateway: ExtraEarningGateway) =
-        GetAllExtraEarningsByUserIdAndYearUseCase(extraEarningGateway = extraEarningGateway)
-
-    @Bean
-    fun createExtraExpenseUseCase(extraExpenseGateway: ExtraExpenseGateway) =
-        CreateExtraExpenseUseCase(extraExpenseGateway = extraExpenseGateway)
-
-    @Bean
-    fun deleteExtraExpenseUseCase(extraExpenseGateway: ExtraExpenseGateway) =
-        DeleteExtraExpenseUseCase(extraExpenseGateway = extraExpenseGateway)
-
-    @Bean
-    fun updateExtraExpenseUseCase(extraExpenseGateway: ExtraExpenseGateway) =
-        UpdateExtraExpenseUseCase(extraExpenseGateway = extraExpenseGateway)
-
-    @Bean
-    fun getExtraExpenseByIdUseCase(extraExpenseGateway: ExtraExpenseGateway) =
-        GetExtraExpenseByIdUseCase(extraExpenseGateway = extraExpenseGateway)
-
-    @Bean
-    fun getAllExtraExpensesByUserIdUseCase(extraExpenseGateway: ExtraExpenseGateway) =
-        GetAllExtraExpensesByUserIdUseCase(extraExpenseGateway = extraExpenseGateway)
-
-    @Bean
-    fun getAllExtraExpensesByUserIdAndMonthUseCase(extraExpenseGateway: ExtraExpenseGateway) =
-        GetAllExtraExpensesByUserIdAndMonthUseCase(extraExpenseGateway = extraExpenseGateway)
-
-    @Bean
-    fun getAllExtraExpensesByUserIdAndYearUseCase(extraExpenseGateway: ExtraExpenseGateway) =
-        GetAllExtraExpensesByUserIdAndYearUseCase(extraExpenseGateway = extraExpenseGateway)
-
-
+    fun getAllExpensesByUserIdAndYearUseCase(expenseGateway: ExpenseGateway) =
+        GetAllExpensesByUserIdAndYearUseCase(expenseGateway = expenseGateway)
 }
