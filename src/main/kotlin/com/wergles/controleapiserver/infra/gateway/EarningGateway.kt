@@ -3,6 +3,7 @@ package com.wergles.controleapiserver.infra.gateway
 import com.wergles.controleapiserver.application.interfaces.IEarningGateway
 import com.wergles.controleapiserver.common.Logger
 import com.wergles.controleapiserver.domain.entity.Earning
+import com.wergles.controleapiserver.domain.exception.BusinessException
 import com.wergles.controleapiserver.domain.exception.NotFoundException
 import com.wergles.controleapiserver.infra.gateway.model.EarningDocument
 import com.wergles.controleapiserver.infra.gateway.repository.EarningRepository
@@ -61,6 +62,9 @@ class EarningGateway(
 
     override fun createEarning(earning: Earning): Earning {
         logger.info("Earning Gateway -> Starting create Earning")
+        if (!earning.fixed && (earning.month == null || earning.year == null))
+            throw BusinessException("Earning is not fixed, month and year it can not be null")
+
         return earningRepository.save(EarningDocument(earning)).toDomain().also {
             logger.info("Earning Gateway -> Successfully create Earning")
         }
@@ -68,6 +72,9 @@ class EarningGateway(
 
     override fun updateEarning(id: String, newEarning: Earning): Earning {
         logger.info("Earning Gateway -> Starting edit Earning")
+        if (!newEarning.fixed && (newEarning.month == null || newEarning.year == null))
+            throw BusinessException("Earning is not fixed, month and year it can not be null")
+
         val earning = earningRepository.findByIdOrNull(id)
             .also { logger.info("Earning Gateway -> Successfully get EarningById") }
             ?: throw NotFoundException("Earning as not found")

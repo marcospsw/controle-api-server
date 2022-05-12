@@ -11,8 +11,8 @@ sealed interface PostingDocument<T> {
     val description: String?
     val userId: String
     val value: BigDecimal
-    val month: Int
-    val year: Int
+    val month: Int?
+    val year: Int?
     val fixed: Boolean
     val created_at: LocalDateTime?
     val updated_at: LocalDateTime?

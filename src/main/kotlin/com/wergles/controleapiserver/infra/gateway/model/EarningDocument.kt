@@ -13,8 +13,8 @@ data class EarningDocument(
     override val description: String?,
     override val userId: String,
     override val value: BigDecimal,
-    override val month: Int,
-    override val year: Int,
+    override val month: Int?,
+    override val year: Int?,
     override val fixed: Boolean,
 
     @CreatedDate

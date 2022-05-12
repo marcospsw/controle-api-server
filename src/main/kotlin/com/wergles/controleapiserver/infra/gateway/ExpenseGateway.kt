@@ -3,6 +3,7 @@ package com.wergles.controleapiserver.infra.gateway
 import com.wergles.controleapiserver.application.interfaces.IExpenseGateway
 import com.wergles.controleapiserver.common.Logger
 import com.wergles.controleapiserver.domain.entity.Expense
+import com.wergles.controleapiserver.domain.exception.BusinessException
 import com.wergles.controleapiserver.domain.exception.NotFoundException
 import com.wergles.controleapiserver.infra.gateway.model.ExpenseDocument
 import com.wergles.controleapiserver.infra.gateway.repository.ExpenseRepository
@@ -61,6 +62,9 @@ class ExpenseGateway(
 
     override fun createExpense(expense: Expense): Expense {
         logger.info("Expense Gateway -> Starting create Expense")
+        if (!expense.fixed && (expense.month == null || expense.year == null))
+            throw BusinessException("Expense is not fixed, month and year it can not be null")
+
         return expensesRepository.save(ExpenseDocument(expense)).toDomain().also {
             logger.info("Expense Gateway -> Successfully create Expense")
         }
@@ -68,6 +72,9 @@ class ExpenseGateway(
 
     override fun updateExpense(id: String, newExpense: Expense): Expense {
         logger.info("Expense Gateway -> Starting edit ExpenseById")
+        if (!newExpense.fixed && (newExpense.month == null || newExpense.year == null))
+            throw BusinessException("Expense is not fixed, month and year it can not be null")
+
         val expense = expensesRepository.findByIdOrNull(id)
             .also { logger.info("Expense Gateway -> Successfully get ExpenseById") }
             ?: throw NotFoundException("Expense as not found")

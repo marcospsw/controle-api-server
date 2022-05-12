@@ -13,14 +13,13 @@ data class ExpenseDocument(
     override val description: String?,
     override val userId: String,
     override val value: BigDecimal,
-    override val month: Int,
-    override val year: Int,
+    override val month: Int?,
+    override val year: Int?,
     override val fixed: Boolean,
 
     @CreatedDate
     override val created_at: LocalDateTime? = null,
     override val updated_at: LocalDateTime? = null
-
 ) : PostingDocument<Expense> {
     constructor(expense: Expense) : this(
         id = expense.id,
