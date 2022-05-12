@@ -29,7 +29,7 @@ class ExpenseGateway(
             it.toDomain()
         }.also {
             logger.info("Expense Gateway -> Successfully get ExpenseById")
-        } ?: throw NotFoundException("Expense as not found")
+        } ?: throw NotFoundException("Expenses as not found")
     }
 
     override fun getAllExpensesByUserIdAndMonth(userId: String, month: Int): List<Expense> {
@@ -38,7 +38,7 @@ class ExpenseGateway(
             it.toDomain()
         }.also {
             logger.info("Expense Gateway -> Successfully get ExpenseByUserIdAndMonth")
-        } ?: throw NotFoundException("Expense as not found")
+        } ?: throw NotFoundException("Expenses as not found")
     }
 
     override fun getAllExpensesByUserIdAndYear(userId: String, year: Int): List<Expense> {
@@ -47,7 +47,16 @@ class ExpenseGateway(
             it.toDomain()
         }.also {
             logger.info("Expense Gateway -> Successfully get ExpenseByUserIdAndYear")
-        } ?: throw NotFoundException("Expense as not found")
+        } ?: throw NotFoundException("Expenses as not found")
+    }
+
+    override fun getAllExpensesByUserIdAndFixedIsTrue(userId: String): List<Expense> {
+        logger.info("Expense Gateway -> Starting get ExpenseByUserIdAndFixed")
+        return expensesRepository.getAllByUserIdAndFixedIsTrue(userId)?.map {
+            it.toDomain()
+        }.also {
+            logger.info("Expense Gateway -> Successfully get ExpenseByUserIdAndFixed")
+        } ?: throw NotFoundException("Expenses as not found")
     }
 
     override fun createExpense(expense: Expense): Expense {

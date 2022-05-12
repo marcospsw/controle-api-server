@@ -13,7 +13,7 @@ sealed interface PostingDocument<T> {
     val value: BigDecimal
     val month: Int
     val year: Int
-    val isFixed: Boolean
+    val fixed: Boolean
     val created_at: LocalDateTime?
     val updated_at: LocalDateTime?
 

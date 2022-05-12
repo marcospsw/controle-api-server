@@ -17,7 +17,8 @@ class ExpenseController(
     private val getExpenseByIdUseCase: GetExpenseByIdUseCase,
     private val getAllExpensesByUserIdUseCase: GetAllExpensesByUserIdUseCase,
     private val getAllExpensesByUserIdAndMonthUseCase: GetAllExpensesByUserIdAndMonthUseCase,
-    private val getAllExpensesByUserIdAndYearUseCase: GetAllExpensesByUserIdAndYearUseCase
+    private val getAllExpensesByUserIdAndYearUseCase: GetAllExpensesByUserIdAndYearUseCase,
+    private val getAllExpensesByUserIdAndFixedIsTrueUseCase: GetAllExpensesByUserIdAndFixedIsTrueUseCase
 ) {
     private val logger = Logger(this.javaClass)
 
@@ -55,6 +56,16 @@ class ExpenseController(
     ): List<ExpenseResponseDTO> {
         logger.info("Expense Controller -> Starting finding Expenses")
         return getAllExpensesByUserIdAndYearUseCase.execute(userId, year).map { it.toResponse() }.also {
+            logger.info("Expense Controller -> Successfully finding Expenses")
+        }
+    }
+
+    @GetMapping("/{userId}/fixed")
+    fun getAllExpensesByUserAndFixed(
+        @PathVariable("userId") userId: String,
+    ): List<ExpenseResponseDTO> {
+        logger.info("Expense Controller -> Starting finding Expenses")
+        return getAllExpensesByUserIdAndFixedIsTrueUseCase.execute(userId).map { it.toResponse() }.also {
             logger.info("Expense Controller -> Successfully finding Expenses")
         }
     }

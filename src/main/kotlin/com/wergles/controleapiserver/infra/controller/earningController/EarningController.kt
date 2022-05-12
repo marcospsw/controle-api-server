@@ -17,7 +17,8 @@ class EarningController(
     private val getEarningByIdUseCase: GetEarningByIdUseCase,
     private val getAllEarningsByUserIdUseCase: GetAllEarningsByUserIdUseCase,
     private val getAllEarningsByUserIdAndMonthUseCase: GetAllEarningsByUserIdAndMonthUseCase,
-    private val getAllEarningsByUserIdAndYearUseCase: GetAllEarningsByUserIdAndYearUseCase
+    private val getAllEarningsByUserIdAndYearUseCase: GetAllEarningsByUserIdAndYearUseCase,
+    private val getAllEarningsByUserIdAndFixedIsTrueUseCase: GetAllEarningsByUserIdAndFixedIsTrueUseCase
 ) {
     private val logger = Logger(this.javaClass)
 
@@ -55,6 +56,16 @@ class EarningController(
     ): List<EarningResponseDTO> {
         logger.info("Earning Controller -> Starting finding Earnings")
         return getAllEarningsByUserIdAndYearUseCase.execute(userId, year).map { it.toResponse() }.also {
+            logger.info("Earning Controller -> Successfully finding Earnings")
+        }
+    }
+
+    @GetMapping("/{userId}/fixed")
+    fun getAllEarningByUserAndFixed(
+        @PathVariable("userId") userId: String,
+    ): List<EarningResponseDTO> {
+        logger.info("Earning Controller -> Starting finding Earnings")
+        return getAllEarningsByUserIdAndFixedIsTrueUseCase.execute(userId).map { it.toResponse() }.also {
             logger.info("Earning Controller -> Successfully finding Earnings")
         }
     }

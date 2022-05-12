@@ -12,7 +12,7 @@ class ExpenseResponseDTO(
     val year: Int,
     val userId: String,
     val value: BigDecimal,
-    val isFixed: Boolean,
+    val fixed: Boolean,
     val created_at: LocalDateTime? = null,
     val updated_at: LocalDateTime? = null,
 )
@@ -25,7 +25,7 @@ fun Expense.toResponse() = ExpenseResponseDTO(
     year = year,
     userId = userId,
     value = value,
-    isFixed = isFixed,
+    fixed = fixed,
     created_at = created_at,
     updated_at = updated_at
 )

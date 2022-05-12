@@ -53,6 +53,10 @@ class UseCaseConfig {
         GetAllEarningsByUserIdAndYearUseCase(earningGateway = earningGateway)
 
     @Bean
+    fun getAllEarningsByUserIdAndFixedIsTrueUseCase(earningGateway: EarningGateway) =
+        GetAllEarningsByUserIdAndFixedIsTrueUseCase(earningGateway = earningGateway)
+
+    @Bean
     fun createExpenseUseCase(expenseGateway: ExpenseGateway) =
         CreateExpenseUseCase(expenseGateway = expenseGateway)
 
@@ -79,4 +83,8 @@ class UseCaseConfig {
     @Bean
     fun getAllExpensesByUserIdAndYearUseCase(expenseGateway: ExpenseGateway) =
         GetAllExpensesByUserIdAndYearUseCase(expenseGateway = expenseGateway)
+
+    @Bean
+    fun getAllExpensesByUserIdAndFixedIsTrueUseCase(expenseGateway: ExpenseGateway) =
+        GetAllExpensesByUserIdAndFixedIsTrueUseCase(expenseGateway = expenseGateway)
 }

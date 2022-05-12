@@ -11,7 +11,7 @@ class CreateEarningRequestDTO(
     val year: Int,
     val userId: String,
     val value: BigDecimal,
-    val isFixed: Boolean
+    val fixed: Boolean
 ) {
     fun toDomain() = Earning(
         title = title,
@@ -20,7 +20,7 @@ class CreateEarningRequestDTO(
         year = year,
         userId = userId,
         value = value,
-        isFixed = isFixed,
+        fixed = fixed,
         created_at = LocalDateTime.now()
     )
 }

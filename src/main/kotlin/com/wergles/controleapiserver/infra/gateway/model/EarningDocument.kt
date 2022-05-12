@@ -15,7 +15,8 @@ data class EarningDocument(
     override val value: BigDecimal,
     override val month: Int,
     override val year: Int,
-    override val isFixed: Boolean,
+    override val fixed: Boolean,
+
     @CreatedDate
     override val created_at: LocalDateTime?,
     override val updated_at: LocalDateTime?
@@ -29,7 +30,7 @@ data class EarningDocument(
         year = earning.year,
         userId = earning.userId,
         value = earning.value,
-        isFixed = earning.isFixed,
+        fixed = earning.fixed,
         created_at = earning.created_at,
         updated_at = earning.updated_at
     )
@@ -42,7 +43,7 @@ data class EarningDocument(
         value = value,
         month = month,
         year = year,
-        isFixed = isFixed,
+        fixed = fixed,
         created_at = created_at,
         updated_at = updated_at
     )

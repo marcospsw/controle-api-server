@@ -15,7 +15,7 @@ data class ExpenseDocument(
     override val value: BigDecimal,
     override val month: Int,
     override val year: Int,
-    override val isFixed: Boolean,
+    override val fixed: Boolean,
 
     @CreatedDate
     override val created_at: LocalDateTime? = null,
@@ -30,7 +30,7 @@ data class ExpenseDocument(
         year = expense.year,
         userId = expense.userId,
         value = expense.value,
-        isFixed = expense.isFixed,
+        fixed = expense.fixed,
         created_at = expense.created_at,
         updated_at = expense.updated_at
     )
@@ -43,7 +43,7 @@ data class ExpenseDocument(
         value = value,
         month = month,
         year = year,
-        isFixed = isFixed,
+        fixed = fixed,
         created_at = created_at,
         updated_at = updated_at
     )

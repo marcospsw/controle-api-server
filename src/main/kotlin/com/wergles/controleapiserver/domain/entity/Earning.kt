@@ -11,7 +11,7 @@ data class Earning(
     val value: BigDecimal,
     val month: Int,
     val year: Int,
-    val isFixed: Boolean,
+    val fixed: Boolean,
     val created_at: LocalDateTime? = null,
     val updated_at: LocalDateTime? = null,
 )

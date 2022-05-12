@@ -7,4 +7,5 @@ interface EarningRepository : MongoRepository<EarningDocument, String> {
     fun getAllByUserId(userId: String): List<EarningDocument>?
     fun getAllByUserIdAndMonth(userId: String, month: Int): List<EarningDocument>?
     fun getAllByUserIdAndYear(userId: String, year: Int): List<EarningDocument>?
+    fun getAllByUserIdAndFixedIsTrue(userId: String): List<EarningDocument>?
 }

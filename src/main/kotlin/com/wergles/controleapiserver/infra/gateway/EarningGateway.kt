@@ -29,7 +29,7 @@ class EarningGateway(
             it.toDomain()
         }.also {
             logger.info("Earning Gateway -> Successfully get EarningsByUserId")
-        } ?: throw NotFoundException("Expense as not found")
+        } ?: throw NotFoundException("Earnings as not found")
     }
 
     override fun getAllEarningsByUserIdAndMonth(userId: String, month: Int): List<Earning> {
@@ -38,7 +38,7 @@ class EarningGateway(
             it.toDomain()
         }.also {
             logger.info("Earning Gateway -> Successfully get EarningsByUserIdAndMonth")
-        } ?: throw NotFoundException("Earning as not found")
+        } ?: throw NotFoundException("Earnings as not found")
     }
 
     override fun getAllEarningsByUserIdAndYear(userId: String, year: Int): List<Earning> {
@@ -47,7 +47,16 @@ class EarningGateway(
             it.toDomain()
         }.also {
             logger.info("Earning Gateway -> Successfully get EarningsByUserIdAndYear")
-        } ?: throw NotFoundException("Earning as not found")
+        } ?: throw NotFoundException("Earnings as not found")
+    }
+
+    override fun getAllEarningsByUserIdAndFixedIsTrue(userId: String): List<Earning> {
+        logger.info("Earning Gateway -> Starting get EarningsByUserIdAndFixed")
+        return earningRepository.getAllByUserIdAndFixedIsTrue(userId)?.map {
+            it.toDomain()
+        }.also {
+            logger.info("Earning Gateway -> Successfully get EarningsByUserIdAndFixed")
+        } ?: throw NotFoundException("Earnings as not found")
     }
 
     override fun createEarning(earning: Earning): Earning {

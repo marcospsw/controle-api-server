@@ -18,6 +18,7 @@ data class UserDocument(
     val email: String,
     val password: String,
     val avatar_url: String? = null,
+
     @CreatedDate
     val created_at: LocalDateTime? = null,
     val updated_at: LocalDateTime? = null
