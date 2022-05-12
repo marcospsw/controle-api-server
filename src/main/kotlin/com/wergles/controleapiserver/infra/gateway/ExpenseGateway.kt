@@ -59,11 +59,11 @@ class ExpenseGateway(
 
     override fun updateExpense(id: String, newExpense: Expense): Expense {
         logger.info("Expense Gateway -> Starting edit ExpenseById")
-        val Expense = expensesRepository.findByIdOrNull(id)
+        val expense = expensesRepository.findByIdOrNull(id)
             .also { logger.info("Expense Gateway -> Successfully get ExpenseById") }
             ?: throw NotFoundException("Expense as not found")
         return expensesRepository.save(
-            Expense.copy(
+            expense.copy(
                 title = newExpense.title,
                 description = newExpense.description,
                 month = newExpense.month,

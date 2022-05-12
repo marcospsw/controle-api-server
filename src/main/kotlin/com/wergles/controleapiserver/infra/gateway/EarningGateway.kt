@@ -59,11 +59,11 @@ class EarningGateway(
 
     override fun updateEarning(id: String, newEarning: Earning): Earning {
         logger.info("Earning Gateway -> Starting edit Earning")
-        val Earning = earningRepository.findByIdOrNull(id)
+        val earning = earningRepository.findByIdOrNull(id)
             .also { logger.info("Earning Gateway -> Successfully get EarningById") }
             ?: throw NotFoundException("Earning as not found")
         return earningRepository.save(
-            Earning.copy(
+            earning.copy(
                 title = newEarning.title,
                 description = newEarning.description,
                 month = newEarning.month,
